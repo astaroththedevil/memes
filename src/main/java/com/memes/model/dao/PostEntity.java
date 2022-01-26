@@ -39,11 +39,10 @@ public class PostEntity {
     @NotNull
     private LocalDateTime dateOfCreation;
 
-    @Column(name = "image")
+    @Column(name = "image_link")
     @NotEmpty
     @NotNull
-    @Lob
-    private byte[] img;
+    private String imgLink;
 
     @ManyToOne
     private UserEntity postOwner;

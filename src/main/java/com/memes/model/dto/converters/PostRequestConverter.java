@@ -12,7 +12,7 @@ public class PostRequestConverter implements Converter<PostDtoRequest, PostEntit
         PostEntity entity = new PostEntity();
         entity.setPostTitle(request.getTitle());
         entity.setPostDescription(request.getDescription());
-        entity.setImg(request.getImg());
+        entity.setImgLink(request.getImgLink());
         return entity;
     }
 

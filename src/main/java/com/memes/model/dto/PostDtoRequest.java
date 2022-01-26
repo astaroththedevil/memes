@@ -23,5 +23,5 @@ public class PostDtoRequest {
     private String description;
 
     @NotEmpty
-    private byte[] img;
+    private String imgLink;
 }
