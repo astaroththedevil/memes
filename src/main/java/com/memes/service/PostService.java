@@ -9,6 +9,7 @@ import com.memes.model.dto.PostDtoResponse;
 import com.memes.model.dto.converters.Converters;
 import com.memes.repository.PostRepository;
 import com.memes.repository.UserRepository;
+import com.memes.utilities.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final Converters converters;
+    private final Utils utils;
 
     public List<PostDtoResponse> getAllPosts() {
         return postRepository.findAll().stream().map(request -> converters.convert(request, PostDtoResponse.class)).collect(Collectors.toList());
