@@ -15,7 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository repository;
-    private BCryptPasswordEncoder encoder;
+    private final PasswordEncoder encoder;
 
     public UserEntity saveUser(UserDtoRequest request) {
         UserEntity user = new UserEntity();

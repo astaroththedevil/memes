@@ -6,10 +6,7 @@ import com.memes.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class UserRestController {
     }
 
     @PostMapping(path = "/add-user")
-    public UserEntity addNewUser(UserDtoRequest request) {
+    public UserEntity addNewUser(@RequestBody UserDtoRequest request) {
         return userService.saveUser(request);
     }
 }

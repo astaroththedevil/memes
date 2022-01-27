@@ -32,7 +32,7 @@ public class UserEntity {
     @Column(name = "password")
     @NotEmpty
     @NotNull
-    @Size(min = 8, max = 30, message = "Password must be at least 6 and at most 30 characters long.")
+    @Size(min = 8, max = 100, message = "Password must be at least 6 and at most 30 characters long.")
     private String password;
 
     @Column(name = "email")
