@@ -7,7 +7,9 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class PostDtoResponse {
+public class UserResponseDto {
 
-    private Long postId;
+    private Long userId;
+    private String username;
+    private String email;
 }

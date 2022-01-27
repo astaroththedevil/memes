@@ -4,12 +4,11 @@ import com.memes.exception.ApplicationError;
 import com.memes.exception.ApplicationException;
 import com.memes.model.dao.PostEntity;
 import com.memes.model.dao.UserEntity;
-import com.memes.model.dto.PostDtoRequest;
-import com.memes.model.dto.PostDtoResponse;
+import com.memes.model.dto.PostRequestDto;
+import com.memes.model.dto.PostResponseDto;
 import com.memes.model.dto.converters.Converters;
 import com.memes.repository.PostRepository;
 import com.memes.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -30,31 +29,31 @@ public class PostService {
     private final UserRepository userRepository;
     private final Converters converters;
 
-    public List<PostDtoResponse> getAllPosts() {
-        return postRepository.findAll().stream().map(request -> converters.convert(request, PostDtoResponse.class)).collect(Collectors.toList());
+    public List<PostResponseDto> getAllPosts() {
+        return postRepository.findAll().stream().map(request -> converters.convert(request, PostResponseDto.class)).collect(Collectors.toList());
     }
 
-    public PostDtoResponse getById(Long id) {
+    public PostResponseDto getById(Long id) {
         return postRepository.findById(id)
-                .map(post -> converters.convert(post, PostDtoResponse.class))
+                .map(post -> converters.convert(post, PostResponseDto.class))
                 .orElseThrow(() -> new ApplicationException(ApplicationError.POST_DOESNT_EXIST, id));
     }
 
-    public List<PostDtoResponse> getByUserId(Long userId) {
+    public List<PostResponseDto> getByUserId(Long userId) {
         return postRepository.findAllByUserId(userId)
                 .stream()
-                .map(post -> converters.convert(post, PostDtoResponse.class))
+                .map(post -> converters.convert(post, PostResponseDto.class))
                 .collect(Collectors.toList());
     }
 
-    public PostDtoResponse getByTitle(String title) {
+    public PostResponseDto getByTitle(String title) {
         return postRepository.findByPostTitle(title)
-                .map(post -> converters.convert(post, PostDtoResponse.class))
+                .map(post -> converters.convert(post, PostResponseDto.class))
                 .orElseThrow(() -> new ApplicationException(ApplicationError.POST_DOESNT_EXIST, title));
     }
 
     @Transactional
-    public PostDtoResponse savePost(PostDtoRequest request) {
+    public PostResponseDto savePost(PostRequestDto request) {
         PostEntity entity = converters.convert(request, PostEntity.class);
         PostEntity savedEntity = postRepository.save(entity);
 
@@ -68,7 +67,7 @@ public class PostService {
         userEntity.setPosts(postEntities);
 
         savedEntity.setPostOwner(userEntity);
-        return converters.convert(savedEntity, PostDtoResponse.class);
+        return converters.convert(savedEntity, PostResponseDto.class);
 
     }
 
@@ -80,11 +79,11 @@ public class PostService {
     }
 
     @Transactional
-    public PostDtoResponse updateById(PostEntity request, Long id, String username) {
+    public PostResponseDto updateById(PostEntity request, Long id, String username) {
         PostEntity post =  postRepository.findByPostIdAndPostOwner(id, username).orElseThrow();
         updateByRequestData(request, id, post);
         PostEntity updatedPost = postRepository.save(post);
-        return converters.convert(updatedPost, PostDtoResponse.class);
+        return converters.convert(updatedPost, PostResponseDto.class);
     }
 
     private void updateByRequestData(PostEntity request, Long id, PostEntity post) {
@@ -96,9 +95,9 @@ public class PostService {
         post.setDateOfCreation(LocalDateTime.now());
     }
 
-    public PostDtoResponse deletePost(Long id, String username) {
+    public PostResponseDto deletePost(Long id, String username) {
         PostEntity entity = postRepository.findByPostIdAndPostOwner(id, username).orElseThrow(() -> new ApplicationException(ApplicationError.POST_DOESNT_EXIST));
         postRepository.deleteById(id);
-        return converters.convert(entity, PostDtoResponse.class);
+        return converters.convert(entity, PostResponseDto.class);
     }
 }

@@ -1,9 +1,8 @@
 package com.memes.controller.rest;
 
 import com.memes.model.dao.UserEntity;
-import com.memes.model.dto.UserDtoRequest;
+import com.memes.model.dto.UserRequestDto;
 import com.memes.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class UserRestController {
     }
 
     @PostMapping(path = "/add-user")
-    public UserEntity addNewUser(@RequestBody UserDtoRequest request) {
+    public UserEntity addNewUser(@RequestBody UserRequestDto request) {
         return userService.saveUser(request);
     }
 }

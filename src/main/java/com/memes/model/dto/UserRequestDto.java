@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDtoRequest {
+public class UserRequestDto {
 
     @NotEmpty
     @Length(min = 6, max = 30)

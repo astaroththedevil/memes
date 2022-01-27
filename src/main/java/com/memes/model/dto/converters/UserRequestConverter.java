@@ -1,14 +1,14 @@
 package com.memes.model.dto.converters;
 
 import com.memes.model.dao.UserEntity;
-import com.memes.model.dto.UserDtoRequest;
+import com.memes.model.dto.UserRequestDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserRequestConverter implements Converter<UserDtoRequest, UserEntity>{
+public class UserRequestConverter implements Converter<UserRequestDto, UserEntity>{
 
     @Override
-    public UserEntity convert(UserDtoRequest request) {
+    public UserEntity convert(UserRequestDto request) {
         UserEntity entity = new UserEntity();
         entity.setUsername(request.getUsername());
         entity.setPassword(request.getPassword());
@@ -18,6 +18,6 @@ public class UserRequestConverter implements Converter<UserDtoRequest, UserEntit
 
     @Override
     public <T, R> boolean canHandle(Class<T> from, Class<R> to) {
-        return from.equals(UserDtoRequest.class) && to.equals(UserEntity.class);
+        return from.equals(UserRequestDto.class) && to.equals(UserEntity.class);
     }
 }

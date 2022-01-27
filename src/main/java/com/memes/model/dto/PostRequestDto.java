@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDtoRequest {
+public class PostRequestDto {
 
     @Min(value = 0)
     private Long userId;
