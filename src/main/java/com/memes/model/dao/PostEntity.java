@@ -44,6 +44,11 @@ public class PostEntity {
     @NotNull
     private String imgLink;
 
+    @Column(name = "user_id")
+    @NotEmpty
+    @NotNull
+    private Long userId;
+
     @ManyToOne
     private UserEntity postOwner;
 }

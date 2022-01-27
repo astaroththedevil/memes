@@ -48,7 +48,7 @@ public class PostService {
     }
 
     public PostDtoResponse getByTitle(String title) {
-        return postRepository.findByTitle(title)
+        return postRepository.findByPostTitle(title)
                 .map(post -> converters.convert(post, PostDtoResponse.class))
                 .orElseThrow(() -> new ApplicationException(ApplicationError.POST_DOESNT_EXIST, title));
     }
@@ -59,7 +59,7 @@ public class PostService {
         PostEntity savedEntity = postRepository.save(entity);
 
         String name = getCurrentUsername();
-        UserEntity userEntity = userRepository.findByUserName(name).orElseThrow();
+        UserEntity userEntity = userRepository.findByUsername(name).orElseThrow();
 
         //double sided binding
 
@@ -81,7 +81,7 @@ public class PostService {
 
     @Transactional
     public PostDtoResponse updateById(PostEntity request, Long id, String username) {
-        PostEntity post =  postRepository.findByIdAndOwnerUserName(id, username).orElseThrow();
+        PostEntity post =  postRepository.findByPostIdAndPostOwner(id, username).orElseThrow();
         updateByRequestData(request, id, post);
         PostEntity updatedPost = postRepository.save(post);
         return converters.convert(updatedPost, PostDtoResponse.class);
@@ -97,7 +97,7 @@ public class PostService {
     }
 
     public PostDtoResponse deletePost(Long id, String username) {
-        PostEntity entity = postRepository.findByIdAndOwnerUserName(id, username).orElseThrow(() -> new ApplicationException(ApplicationError.POST_DOESNT_EXIST));
+        PostEntity entity = postRepository.findByPostIdAndPostOwner(id, username).orElseThrow(() -> new ApplicationException(ApplicationError.POST_DOESNT_EXIST));
         postRepository.deleteById(id);
         return converters.convert(entity, PostDtoResponse.class);
     }

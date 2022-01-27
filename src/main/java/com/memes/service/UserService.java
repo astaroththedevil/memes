@@ -4,6 +4,7 @@ import com.memes.model.dao.UserEntity;
 import com.memes.model.dto.UserDtoRequest;
 import com.memes.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository repository;
-    private final PasswordEncoder encoder;
+    private BCryptPasswordEncoder encoder;
 
     public UserEntity saveUser(UserDtoRequest request) {
         UserEntity user = new UserEntity();
