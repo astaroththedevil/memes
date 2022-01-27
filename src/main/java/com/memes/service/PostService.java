@@ -9,6 +9,7 @@ import com.memes.model.dto.PostDtoResponse;
 import com.memes.model.dto.converters.Converters;
 import com.memes.repository.PostRepository;
 import com.memes.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

@@ -2,8 +2,8 @@ package com.memes.controller.rest;
 
 import com.memes.model.dao.UserEntity;
 import com.memes.model.dto.UserDtoRequest;
-import com.memes.model.dto.UserDtoResponse;
 import com.memes.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
